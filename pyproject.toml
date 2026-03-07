@@ -1,0 +1,15 @@
+[project]
+name = "mi-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=1.2.10",
+    "langchain-nvidia-ai-endpoints>=1.1.0",
+    "langchain-openai>=1.1.10",
+    "langgraph>=1.0.10",
+    "notion-client>=3.0.0",
+    "pillow>=12.1.1",
+    "python-dotenv>=1.2.2",
+]
