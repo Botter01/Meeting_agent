@@ -1,53 +1,29 @@
-Péter (Project Manager): Sziasztok mindenki, kezdjük el az értekezletet. Ma a Q1-es sprint lezárásáról, a Q2 tervezéséről, illetve néhány infrastrukturális kérdésről is szeretnék beszélni. Vágjunk bele, Anna kezdje a frontend résszel.
+Péter (Project Manager): Sziasztok, kezdjük el a meetinget. Több kritikus dolog van amit ma meg kell beszélnünk, szóval vágjunk bele.
 
-Anna (Frontend Developer): Igen, szóval a főoldal redesign 90%-ban kész, csak a mobilos nézeten van még néhány bug. Tervezem, hogy péntekig teljesen befejezem. A dashboard komponenseket viszont még el sem kezdtem, arra több időt kell szánni. Volt egy design review is a héten Katával, ahol kiderült, hogy az ügyfél szeretne egy dark mode opciót is, amit eredetileg nem terveztünk bele.
+Anna (Frontend Developer): Igen, szólok rögtön – a főoldal mobilos nézete teljesen összetört tegnap este, ügyfelek jelezték. Ez most a legégetőbb probléma, ma mindenképp meg kell javítani.
 
-Péter: Rendben, tehát a főoldal péntekig kész. A dashboard mikor reális? És a dark mode?
+Péter: Ez kritikus, Anna március 10-re javítsa meg. Mi a helyzet a dashboarddal?
 
-Anna: Ha jövő héten elkezdek rajta dolgozni, akkor március 28-ra tudnám vállalni a dashboardot. A dark mode viszont extra munka, azt realisztikusan április 10-re tudnám megcsinálni, de csak akkor ha a dashboard már kész. Egyébként a Figma fájlokat is frissíteni kell, mert az ügyfél kért néhány módosítást a színpalettán, azt is be kell vezetni.
+Anna: A dashboard március 28-ra lesz kész. Nincs különösebb akadálya, simán haladok rajta.
 
-Péter: Oké, jegyezzük fel. Balázs, mi a helyzet a backenddel?
+Péter: Rendben. Balázs?
 
-Balázs (Backend Developer): Az API végpontok 70%-a elkészült, a maradék részen még dolgozom. A legnagyobb probléma most az autentikációs modul, ott egy elég komoly bug van amit még nem sikerült megoldani. Emiatt a tesztelés is csúszik. Egyébként a adatbázis migráció is hátravan még, azt március 20-ra tervezem. A Redis cache bevezetését meg kellett halasztani, mert kiderült hogy a jelenlegi szerver konfiguráció nem támogatja megfelelően.
+Balázs (Backend Developer): Az autentikációs bug nagyon súlyos, biztonsági rés van benne, március 18-ra javítom. Az API dokumentációt március 22-re megírom, az nem annyira sürgős. Az adatbázis migrációt március 20-ra elvégzem, azt közepesen sürgősnek mondanám.
 
-Péter: Ez kritikus, mikor tudod megoldani az autentikációt?
+Péter: Gábor, te mit mondasz?
 
-Balázs: Reálisan március 18-ra tudnám javítani az autentikációs bugot. Az összes API végpontot pedig március 22-re. A Redis cache kérdésében egyébként szerintem érdemes lenne Gáborral beszélni, mert ez infrastrukturális döntés, nem csak backend fejlesztési kérdés.
+Gábor (DevOps Engineer): A CI/CD pipeline frissítés március 15-re kész, ez elég fontos mert blokkol más feladatokat. A Redis cache bevezetése március 25-re, az egy hosszabb munka de nem kritikus. Az onboarding környezetet március 25-re készítem el az új fejlesztőknek.
 
-Péter: Rendben, Gábor, te mit gondolsz erről?
+Péter: Szabó, tesztelés?
 
-Gábor (DevOps Engineer): Igen, a Redis bevezetése valóban infrastrukturális változtatást igényel. Meg kell nézni a jelenlegi szerver kapacitást, és valószínűleg egy új instance-t kell indítani. Ezt március 25-re meg tudom oldani, de előtte kell egy egyeztetés Balázzsal hogy pontosan milyen konfigurációra van szükség. Egyébként a CI/CD pipeline-t is frissíteni kellene, mert a jelenlegi verzió már nem támogatja az új Docker image formátumot. Ez egy kisebb feladat, március 15-re megcsinálom.
+Szabó (QA Engineer): A Playwright teszteket március 22-re készítem el, Péter kérte hogy ez legyen prioritás. A staging környezet javítása március 16-ra, az is fontos mert nélküle nem tudunk tesztelni.
 
-Péter: Köszönöm Gábor. Szabó, te mit mondasz a tesztelésről?
+Péter: Kata, ügyfél?
 
-Szabó (QA Engineer): Mivel az API még nem kész, a tesztelést nem tudtam rendesen elkezdeni. Amit tudtam, a frontend statikus részeit teszteltem, ott 12 minor bugt találtam, amiket elküldtem Annának. A backend tesztelést Balázs autentikációs javítása után tudom elkezdeni, tehát március 19-től. Egyébként szeretném javasolni, hogy vezessünk be automatizált tesztelést, mert a jelenlegi manuális folyamat nagyon lassú. Erre van egy eszköz amit kipróbáltam, a Playwright, azzal a frontend teszteket le lehetne automatizálni.
+Kata (Account Manager): Holnap van egy call az ügyféllel a határidőkről, az elég fontos. A demót április 5-re szervezem meg. A havi státuszriportot e hónap 28-án küldöm el.
 
-Péter: Ez jó ötlet, Szabó. Csináld meg a Playwright bevezetésének tervét március 22-ig, és akkor megbeszéljük.
+Péter: Rendben, akkor még egy dolog – fel kell tölteni a céges wikibe a Q1 retrospektív dokumentumot. Ezt valaki csinálja meg március 31-re, de nem kritikus. Anna, te vállalod?
 
-Szabó: Rendben, megcsinálom. Egyébként még egy dolog: a staging környezetben van egy intermittent hiba, ami néha megakasztja a tesztelést. Gáborral kellene egyeztetni erről is.
+Anna: Igen, megcsinálom.
 
-Gábor: Igen, tudok róla, március 16-ra megjavítom a staging környezetet.
-
-Péter: Kiváló. Kata, mi a helyzet az ügyféllel?
-
-Kata (Account Manager): Az ügyfél türelmetlen, eredetileg március 31-et vártak, de a csúszások miatt valószínűleg ezt nem fogjuk tudni tartani. Javasoltam nekik április 15-öt, de még nem fogadták el. Holnap lesz egy call velük, ahol véglegesítjük a határidőt. Egyébként az ügyfél jelezte, hogy szeretnének egy demo-t látni még az átadás előtt, valahol április elején. Azt is meg kell szervezni.
-
-Péter: Rendben, a demót április 5-re szervezzük be, addig a főbb funkcióknak készen kell lenniük. Kata, te koordinálod az ügyféllel?
-
-Kata: Igen, megbeszélem velük holnap a call-on. Egyébként az ügyfél kért egy havi státuszriportot is, amit minden hónap végén el kell küldeni nekik. Ezt én fogom összeállítani, de kérem a csapatot, hogy minden hónap 28-án küldjék el nekem a saját területükről a státuszt.
-
-Péter: Rendben, ez fontos. Mindenki tudomásul veszi? Tehát minden hónap 28-án Katának elkülditek a státuszt.
-
-Mindenki: Igen, rendben.
-
-Péter: Még egy téma van, a csapatbővítés. HR-rel egyeztetve két új fejlesztőt fogunk felvenni, egy seniort a backendre és egy juniort a frontentre. Az interjúk március 20-tól kezdődnek, Balázs és Anna, kérlek titeket hogy vegyetek részt a technikai interjúkon.
-
-Anna: Rendben, benne vagyok.
-
-Balázs: Én is, de március 22-ig nagyon sűrű vagyok az API miatt, utána tudok jobban részt venni.
-
-Péter: Megértjük, rugalmasan szervezzük. Gábor, az onboarding környezetet március 25-ig tudod előkészíteni az új fejlesztőknek?
-
-Gábor: Igen, a Redis-szel együtt megoldom, március 25-re mindkettő kész lesz.
-
-Péter: Akkor ennyi, köszönöm mindenkinek a részvételt, legközelebb március 22-én találkozunk!
+Péter: Köszönöm, akkor ennyi!

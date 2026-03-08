@@ -6,28 +6,53 @@ load_dotenv()
 
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
 DATABASE_ID = os.getenv("DATABASE_ID")
+TASK_TRACKER_ID = os.getenv("TASK_TRACKER_ID")
+SUMMARY_PAGE_ID = os.getenv("SUMMARY_PAGE_ID")
 
 notion = Client(auth=NOTION_TOKEN)
 
-tasks = [
-    {"task": "Frontend dizájn véglegesítése", "assignee": "Kovács Anna", "deadline": "2025-03-15"},
-    {"task": "API dokumentáció megírása", "assignee": "Nagy Péter", "deadline": "2025-03-20"},
-    {"task": "Tesztesetek elkészítése", "assignee": "Szabó Balázs", "deadline": "2025-03-18"},
-]
-
-for t in tasks:
+def notion_uploader(state):
+    print("🔵 Notion feltöltés fut...")
+    
     notion.pages.create(
-        parent={"database_id": DATABASE_ID},
+        parent={"page_id": SUMMARY_PAGE_ID},
         properties={
-            "Name": {
-                "title": [{"text": {"content": t["task"]}}]
-            },
-            "Assignee": {
-                "rich_text": [{"text": {"content": t["assignee"]}}]
-            },
-            "Date of Meeting": {
-                "date": {"start": t["deadline"]}
+            "title": {
+                "title": [{"text": {"content": "Meeting összefoglaló"}}]
             }
-        }
+        },
+        children=[
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {
+                    "rich_text": [{"type": "text", "text": {"content": state["summary"]}}]
+                }
+            }
+        ]
     )
-    print(f"Létrehozva: {t['task']}")
+    
+    for item in state["approved_items"]:
+        print(f"Feltöltés: {item}")
+        notion.pages.create(
+            parent={"database_id": DATABASE_ID},
+            properties={
+                "Task Name": {
+                    "title": [{"text": {"content": item["task"]}}]
+                },
+                "Assignee": {
+                    "rich_text": [{"text": {"content": item["assignee"]}}]
+                },
+                "Due Date": {
+                    "date": {"start": item["deadline"]}
+                },
+                "Status": {
+                    "status": {"name": "Not started"}
+                },
+                "Priority": {
+                    "select": {"name": item.get("priority", "Low")}
+                }
+            }
+        )
+    
+    return state
