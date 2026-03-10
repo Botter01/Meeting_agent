@@ -606,6 +606,7 @@ dependencies = [
     { name = "notion-client" },
     { name = "pillow" },
     { name = "python-dotenv" },
+    { name = "secure-smtplib" },
 ]
 
 [package.metadata]
@@ -617,6 +618,7 @@ requires-dist = [
     { name = "notion-client", specifier = ">=3.0.0" },
     { name = "pillow", specifier = ">=12.1.1" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
+    { name = "secure-smtplib", specifier = ">=0.1.1" },
 ]
 
 [[package]]
@@ -1257,6 +1259,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6", size = 206888, upload-time = "2023-05-01T04:11:33.229Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06", size = 54481, upload-time = "2023-05-01T04:11:28.427Z" },
+]
+
+[[package]]
+name = "secure-smtplib"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1f/86/30df3f748dd43c064bed3059f116a32adc71622087b1d4eb379e2fb663f7/secure-smtplib-0.1.1.tar.gz", hash = "sha256:3d4903f6612626ccd9b77ef05313cb3c3952a59a4d756cda2377b272fabad8b9", size = 5912, upload-time = "2015-04-07T14:44:42.839Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1c/bd/3c602fbfa16cad120e93e4b0286d89aad0ec2ce163cdf5410a6ce4cadba5/secure_smtplib-0.1.1-py2.py3-none-any.whl", hash = "sha256:645ea0a341f306fa3307c8fe1169765c417ff363db9946fa69f3669a9b718069", size = 3384, upload-time = "2015-04-07T14:44:45.188Z" },
 ]
 
 [[package]]

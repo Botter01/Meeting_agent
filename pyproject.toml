@@ -12,4 +12,5 @@ dependencies = [
     "notion-client>=3.0.0",
     "pillow>=12.1.1",
     "python-dotenv>=1.2.2",
+    "secure-smtplib>=0.1.1",
 ]
