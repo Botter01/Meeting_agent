@@ -4,7 +4,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from dotenv import load_dotenv
 import os
 import json
-from meeting_agent import notion_uploader, today
+from meeting_agent import notion_uploader, email_sender, today
 
 load_dotenv()
 
@@ -198,10 +198,9 @@ builder.add_conditional_edges("critic", should_retry, {
     "continue": "notion_uploader"
 })
 builder.add_edge("increment_retry", "extractor")
-builder.add_edge("notion_uploader", END)
-#builder.add_node("email_sender", email_sender)
-#builder.add_edge("notion_uploader", "email_sender")
-#builder.add_edge("email_sender", END)
+builder.add_node("email_sender", email_sender)
+builder.add_edge("notion_uploader", "email_sender")
+builder.add_edge("email_sender", END)
 graph = builder.compile()
 
 result = graph.invoke({
@@ -213,10 +212,6 @@ result = graph.invoke({
     "critic_feedback":"",
     "retry_count": 0
 })
-
-print(f"Summary result: {result["summary"]}")
-print(f"\n\nAction Items: {result["action_items"]}")
-print(f"\n\nCritic verdict: {result["critic_approved"]}")
 
 """with open("graph.png", "wb") as f:
     f.write(graph.get_graph().draw_mermaid_png())"""
