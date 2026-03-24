@@ -5,8 +5,18 @@ from dotenv import load_dotenv
 import os
 import json
 from meeting_agent import notion_uploader, email_sender, today
+from langfuse import get_client
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
+
+langfuse = get_client()
+langfuse_handler = CallbackHandler()
+ 
+if langfuse.auth_check():
+    print("Langfuse client is authenticated and ready!")
+else:
+    print("Authentication failed. Please check your credentials and host.")
 
 with open("transcript.txt", "r", encoding="utf-8") as f:
     transcript = f.read()
@@ -201,7 +211,7 @@ builder.add_edge("increment_retry", "extractor")
 builder.add_node("email_sender", email_sender)
 builder.add_edge("notion_uploader", "email_sender")
 builder.add_edge("email_sender", END)
-graph = builder.compile()
+graph = builder.compile().with_config({"callbacks": [langfuse_handler]})
 
 result = graph.invoke({
     "transcript": transcript,
