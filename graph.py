@@ -4,7 +4,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from dotenv import load_dotenv
 import os
 import json
-from meeting_agent import notion_uploader, email_sender, today
+from notion import notion_uploader, email_sender, today
 from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 
