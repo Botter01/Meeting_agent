@@ -5,6 +5,7 @@ from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from fastmcp import FastMCP
 
 load_dotenv()
 today = datetime.now().strftime("%Y-%m-%d-%H:%M")
@@ -21,8 +22,10 @@ LANGFUSE_SECRET_KEY = os.getenv("LANGFUSE_SECRET_KEY")
 LANGFUSE_BASE_URL = os.getenv("LANGFUSE_BASE_URL")
 
 notion = Client(auth=NOTION_TOKEN)
+mcp = FastMCP("meeting-tools")
 
-def notion_uploader(state):
+@mcp.tool()
+def notion_uploader_tool(state):
     print("Notion feltöltés fut...")
     
     notion.pages.create(
@@ -76,7 +79,8 @@ def get_emails():
     
     return emails
 
-def email_sender(state):
+@mcp.tool()
+def email_sender_tool(state):
     print("Email küldés fut...")
     emails = get_emails()
 

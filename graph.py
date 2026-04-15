@@ -4,7 +4,7 @@ from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from dotenv import load_dotenv
 import os
 import json
-from notion import notion_uploader, email_sender, today
+from notion import notion_uploader_tool, email_sender_tool, today
 from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 
@@ -193,7 +193,6 @@ def increment_retry(state):
     print(f"Retry {state.get('retry_count', 0) + 1}/3...")
     return {**state, "retry_count": state.get("retry_count", 0) + 1}
 
-
 builder = StateGraph(MeetingState)
 builder.add_node("summarizer", summarizer)
 builder.set_entry_point("summarizer")
@@ -202,13 +201,13 @@ builder.add_edge("summarizer", "extractor")
 builder.add_node("critic", critic)
 builder.add_edge("extractor", "critic")
 builder.add_node("increment_retry", increment_retry)
-builder.add_node("notion_uploader", notion_uploader)
+builder.add_node("notion_uploader", notion_uploader_tool)
 builder.add_conditional_edges("critic", should_retry, {
     "retry": "increment_retry",
     "continue": "notion_uploader"
 })
 builder.add_edge("increment_retry", "extractor")
-builder.add_node("email_sender", email_sender)
+builder.add_node("email_sender", email_sender_tool)
 builder.add_edge("notion_uploader", "email_sender")
 builder.add_edge("email_sender", END)
 graph = builder.compile().with_config({"callbacks": [langfuse_handler]})
@@ -223,5 +222,5 @@ result = graph.invoke({
     "retry_count": 0
 })
 
-"""with open("graph.png", "wb") as f:
-    f.write(graph.get_graph().draw_mermaid_png())"""
+with open("graph.png", "wb") as f:
+    f.write(graph.get_graph().draw_mermaid_png())
